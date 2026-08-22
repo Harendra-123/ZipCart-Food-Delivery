@@ -1,9 +1,39 @@
-import { Divider,Card,Button } from '@mui/material'
+import { Divider,Card,Button,Box,Modal, Grid, TextField } from '@mui/material'
 import React from 'react'
 import { CartItem } from './CartItem'
 import { Address } from './Address';
 import AddLocationAltIcon from '@mui/icons-material/AddLocationAlt';
+import {ErrorMessage, Field, Form, Formik} from "formik";
+// import * as Yup from "yup";
 
+
+
+const style = {
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: 400,
+  bgcolor: 'gray',
+   outline: "none",
+  boxShadow: 24,
+  p: 4,
+};
+const initialValues={
+  streetAddress:" ",
+  state:" ",
+  pincode:" ",
+  city:" "
+
+}
+
+// const validationSchema=Yup.object.shape({
+// streetAddress:Yup.string().required("Street address is required"),
+// state:Yup.string().required("State is required"),
+// pincode:Yup.required("pincode  is required"),
+// city:Yup.string().required("city is required"),
+
+// })
 
 
 const items=[1,1]; 
@@ -13,11 +43,17 @@ const items=[1,1];
 
   }
 
- const  handleOpenAddressModel=()=>{
+ const  handleOpenAddressModel=()=>setOpen(true);
+   const [open, setOpen] = React.useState(false);
+  // const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
- }
+  const handleSubmit=(value)=>{
+    console.log("Valur:",value)
+
+  }
   return (
-    <div>
+    <>
         
         <main className='lg:flex justify-between'>
          <section className='lg:w-[30%] space-y-6 lg:min-h-screen pt-10 '>
@@ -74,7 +110,75 @@ const items=[1,1];
             </div>
           </section>
         </main>
-    </div>
+
+
+      
+
+      <Modal
+  open={open}
+  onClose={handleClose}
+>
+  <Box sx={style}>
+      <Formik initialValues={initialValues}
+  //  validationSchema={validationSchema}
+      onSubmit={handleSubmit}
+    >
+      <Form>
+<Grid container spacing={2}>
+
+      <Grid size={12}>
+        <Field
+        as={TextField}
+          name="streetAddress"
+          label="Street Address"
+          fullWidth
+          variant="outlined"
+        
+
+        />
+      </Grid>
+
+      <Grid size={12}>
+        <Field
+        as={TextField}
+          name="state"
+          label="State"
+          fullWidth
+          variant="outlined"
+        />
+      </Grid>
+
+      <Grid size={12}>
+        <Field
+        as={TextField}
+          name="city"
+          label="City"
+          fullWidth
+          variant="outlined"
+        />
+      </Grid>
+
+      <Grid size={12}>
+        <Field
+        as={TextField}
+          name="pincode"
+          label="Pincode"
+          fullWidth
+          variant="outlined"
+        />
+      </Grid>
+
+      <Grid item xs={12}>
+        <Button fullWidth variant='contained' type='onSubmit' color='primary'>Deliver Here </Button>
+      </Grid>
+    </Grid>
+      </Form>
+    
+
+    </Formik>
+  </Box>
+</Modal>
+    </>
   )
 }
 
