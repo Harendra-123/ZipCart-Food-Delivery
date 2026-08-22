@@ -17,7 +17,7 @@ function App() {
       <CssBaseline/>
     <Navbar/>
 
-    {/* <Home/> */}
+    <Home/>
    {/* <RestaurantDetails/> */}
      {/* <Cart/> */}
      <Profile/>
