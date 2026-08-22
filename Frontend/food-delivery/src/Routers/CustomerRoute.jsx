@@ -5,6 +5,7 @@ import Home from '../component/Home/Home'
 import Profile from '../component/Profile/Profile'
 import Cart from '../component/Cart/Cart'
 import RestauratDetails from '../component/Restaurant/RestaurantDetails'
+import Auth from '../component/Auth/Auth'
 
 export default function CustomerRoute() {
   return (
@@ -18,6 +19,7 @@ export default function CustomerRoute() {
                <Route path='/cart' element={<Cart/>}/>
                 <Route path='/my-profile/*' element={<Profile/>}/>
         </Routes>
+        <Auth/>
     </div>
   )
 }
